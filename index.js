@@ -22,6 +22,11 @@ const engineList = {
       href: 'https://fanyi.sogou.com',
       searchHref: 'https://fanyi.sogou.com/#auto/zh-CHS/$search',
       isIframe: true,
+    }, {
+      name: '有道词典',
+      href: 'http://dict.youdao.com/',
+      searchHref: 'http://dict.youdao.com/w/eng/$search',
+      isIframe: true,
     }
   ],
   academic: [
@@ -172,8 +177,11 @@ let selectedEngine = $(engines[0]);
 selectedEngine.addClass('selected');
 
 // bind Enter search event
-const searchInput = $('#search-bar input');
+const searchInput = $('#input-area');
 searchInput.on('keydown', e => {
+  if (!e.shiftKey && e.keyCode === 13) {  // 阻止回车. 因为回车用于搜索功能了, 如果想要输入回车, 需要输入shift + 回车
+    e.preventDefault();
+  }
   setTimeout(() => {
     const searchText = searchInput.val();
     let matchRes1 = searchText.match(/^\s[0-9]{2}\s/); // 在文本开始选择引擎
@@ -190,7 +198,6 @@ searchInput.on('keydown', e => {
 
     let matchRes2 = searchText.match(/(.+)(\s[0-9]{2}\s)$/) // 在文本末尾选择引擎
     if (matchRes2 && matchRes2.length > 0) {
-      console.log(matchRes2[2].length);
       for (let engine of engines) {
         engine.classList.remove('selected');
         if (engine.getAttribute('data-engine-id') === matchRes2[2].trim()) {
@@ -203,7 +210,7 @@ searchInput.on('keydown', e => {
       }
     }
 
-    if (e.keyCode === 13 && searchText) {
+    if (!e.shiftKey && e.keyCode === 13 && searchText) {
       $(selectedEngine).trigger('click');
     }
   }, 0);
@@ -211,5 +218,5 @@ searchInput.on('keydown', e => {
 
 // auto focus input 
 $(() => {
-  $('#search-bar input').focus();
+  $('#input-area').focus();
 })

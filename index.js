@@ -214,7 +214,13 @@ searchInput.on('keydown', e => {
       $(selectedEngine).trigger('click');
     }
   }, 0);
-})
+});
+
+// clear input area
+$('#clear-input-area').on('click', e => {
+  searchInput.val('');
+  searchInput.focus();
+});
 
 // auto focus input 
 $(() => {

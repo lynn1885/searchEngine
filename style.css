@@ -104,12 +104,13 @@ html, body {
   line-height: 26px;
   padding: 4px 10px 4px 20px;
   transition: all 0.2s;
-  border-radius: 2px;
+  border-radius: 3px;
   color: rgb(99, 81, 66);
   cursor: pointer;
 }
 .engine.selected {
   background: rgb(238, 233, 227);
+  transition: all 0.2s;
 }
 .engine.is-frame {
   color: rgb(173, 135, 101);

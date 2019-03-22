@@ -13,6 +13,34 @@ const engineList = {
       name: '知乎',
       href: 'https://www.zhihu.com',
       searchHref: 'https://www.zhihu.com/search?type=content&q=$search',
+    }, {
+      name: 'Google Translate',
+      href: 'https://translate.google.com',
+      searchHref: 'https://translate.google.com/#view=home&op=translate&sl=en&tl=zh-CN&text=$search',
+    }, {
+      name: '搜狗翻译',
+      href: 'https://fanyi.sogou.com',
+      searchHref: 'https://fanyi.sogou.com/#auto/zh-CHS/$search',
+      isIframe: true,
+    }
+  ],
+  academic: [
+    {
+      name: 'CNKI',
+      href: 'http://scholar.cnki.net',
+      searchHref: 'http://scholar.cnki.net/result.aspx?q=$search',
+    }, {
+      name: '51下论文-知网1',
+      href: 'http://www.51xialunwen.com/',
+      searchHref: 'http://a.38zhubao.net:91/kns/brief/Default_Result.aspx?txt_1_sel=FT%24%25%3D%7C&txt_1_value1=$search&txt_1_special1=%25&txt_extension=&currentid=txt_1_value1&dbJson=coreJson&dbPrefix=SCDB&db_opt=CJFQ%2CCDFD%2CCMFD%2CCPFD%2CIPFD%2CCCND%2CCJRF%2CCCJD&singleDB=SCDB&db_codes=CJFQ%2CCDFD%2CCMFD%2CCPFD%2CIPFD%2CCCND%2CCJRF%2CCCJD&singleDBName=&againConfigJson=false&action=scdbsearch&ua=1.11',
+    }, {
+      name: '51下论文-万方',
+      href: 'http://www.51xialunwen.com/',
+      searchHref: 'http://www.cquc.net:8088/S/Paper.aspx?q=$search',
+    }, {
+      name: '百度学术',
+      href: 'http://xueshu.baidu.com/',
+      searchHref: 'http://xueshu.baidu.com/s?wd=$search',
     }
   ],
   images: [
@@ -49,25 +77,6 @@ const engineList = {
       isIframe: true,
     }
   ],
-  academic: [
-    {
-      name: 'CNKI',
-      href: 'http://scholar.cnki.net',
-      searchHref: 'http://scholar.cnki.net/result.aspx?q=$search',
-    }, {
-      name: '51下论文-知网1',
-      href: 'http://www.51xialunwen.com/',
-      searchHref: 'http://a.38zhubao.net:91/kns/brief/Default_Result.aspx?txt_1_sel=FT%24%25%3D%7C&txt_1_value1=$search&txt_1_special1=%25&txt_extension=&currentid=txt_1_value1&dbJson=coreJson&dbPrefix=SCDB&db_opt=CJFQ%2CCDFD%2CCMFD%2CCPFD%2CIPFD%2CCCND%2CCJRF%2CCCJD&singleDB=SCDB&db_codes=CJFQ%2CCDFD%2CCMFD%2CCPFD%2CIPFD%2CCCND%2CCJRF%2CCCJD&singleDBName=&againConfigJson=false&action=scdbsearch&ua=1.11',
-    }, {
-      name: '51下论文-万方',
-      href: 'http://www.51xialunwen.com/',
-      searchHref: 'http://www.cquc.net:8088/S/Paper.aspx?q=$search',
-    }, {
-      name: '百度学术',
-      href: 'http://xueshu.baidu.com/',
-      searchHref: 'http://xueshu.baidu.com/s?wd=$search',
-    }
-  ],
   program: [
     {
       name: 'github',
@@ -81,10 +90,6 @@ const engineList = {
   ],
   others: [
     {
-      name: 'Google Translate',
-      href: 'https://translate.google.com',
-      searchHref: 'https://translate.google.com/#view=home&op=translate&sl=en&tl=zh-CN&text=$search',
-    }, {
       name: '公众号',
       href: 'https://weixin.sogou.com/weixin',
       searchHref: 'https://weixin.sogou.com/weixin?type=2&query=$search&ie=utf8&s_from=input',

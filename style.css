@@ -16,7 +16,7 @@ html, body {
 /* left: search tool */
 #search-tool {
   float: left;
-  width: 240px;
+  width: 260px;
   padding: 6px;
   margin: 0px;
   box-sizing: border-box;
@@ -31,7 +31,7 @@ html, body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
+  width: 260px;
   height: 50px;
   background: rgb(245, 244, 243);
 }
@@ -110,7 +110,7 @@ html, body {
 /* search content */
 #search-content {
   height: 100%;
-  margin-left: 240px; /* 给左侧边栏留出空间 */
+  margin-left: 260px; /* 给左侧边栏留出空间 */
   padding: 0;
   margin: 0;
   overflow: hidden;

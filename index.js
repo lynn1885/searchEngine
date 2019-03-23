@@ -139,17 +139,20 @@ for (let groupName in engineList) {
 engineDom = $(engineDomStr);
 engineContainer.append(engineDom);
 
-// bind click search event
+// prepare DOMs & variables
 const title = $('title');
 const engines = $('.engine');
 const iframe = $('#search-content iframe');
+const curEngineName = $('#cur-engine-name span');
+const searchInput = $('#input-area');
+let selectedEngine = $(engines[0]);
+setSelectedEngine(engines, selectedEngine);
+
+// bind click search event
 for (let engine of engines) {
   engine.addEventListener('click', e => {
-    for (let engine of engines) {
-      engine.classList.remove('selected');
-    }
-    e.currentTarget.classList.add('selected');
-    selectedEngine = e.currentTarget;
+    selectedEngine = $(e.currentTarget);
+    setSelectedEngine(engines, selectedEngine)
     iframe.attr('src', '');
     const isIframe = e.currentTarget.getAttribute('data-is-iframe');
     const searchText = searchInput.val();
@@ -172,12 +175,7 @@ for (let engine of engines) {
   })
 }
 
-// set default search engine
-let selectedEngine = $(engines[0]);
-selectedEngine.addClass('selected');
-
 // bind Enter search event
-const searchInput = $('#input-area');
 searchInput.on('keydown', e => {
   if (!e.shiftKey && e.keyCode === 13) {  // 阻止回车. 因为回车用于搜索功能了, 如果想要输入回车, 需要输入shift + 回车
     e.preventDefault();
@@ -187,10 +185,9 @@ searchInput.on('keydown', e => {
     let matchRes1 = searchText.match(/^\s[0-9]{2}\s/); // 在文本开始选择引擎
     if (matchRes1 && matchRes1.length > 0) {
       for (let engine of engines) {
-        engine.classList.remove('selected');
         if (engine.getAttribute('data-engine-id') === matchRes1[0].trim()) {
-          engine.classList.add('selected');
-          selectedEngine = engine;
+          selectedEngine = $(engine);
+          setSelectedEngine(engines, selectedEngine);
           searchInput.val('');
         }
       }
@@ -199,19 +196,18 @@ searchInput.on('keydown', e => {
     let matchRes2 = searchText.match(/(.+)(\s[0-9]{2}\s)$/) // 在文本末尾选择引擎
     if (matchRes2 && matchRes2.length > 0) {
       for (let engine of engines) {
-        engine.classList.remove('selected');
         if (engine.getAttribute('data-engine-id') === matchRes2[2].trim()) {
-          engine.classList.add('selected');
-          selectedEngine = engine;
+          selectedEngine = $(engine);
+          setSelectedEngine(engines, selectedEngine);
           let oldInputVal = searchInput.val();
           searchInput.val(oldInputVal.slice(0, oldInputVal.length - Number(matchRes2[2].length)));
-          $(selectedEngine).trigger('click');
+          selectedEngine.trigger('click');
         }
       }
     }
 
     if (!e.shiftKey && e.keyCode === 13 && searchText) {
-      $(selectedEngine).trigger('click');
+      selectedEngine.trigger('click');
     }
   }, 0);
 });
@@ -226,3 +222,13 @@ $('#clear-input-area').on('click', e => {
 $(() => {
   $('#input-area').focus();
 })
+
+// functoin: set selected engine
+function setSelectedEngine (engines, selectedEngine) {
+  for (let engine of engines) {
+    engine.classList.remove('selected');
+  }
+  selectedEngine.addClass('selected');
+  const selectedEngineName = selectedEngine.text();
+  curEngineName.text(selectedEngineName);
+}

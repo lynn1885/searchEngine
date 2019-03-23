@@ -32,14 +32,13 @@ html, body {
   top: 0;
   left: 0;
   width: 260px;
-  height: 86px;
   background: rgb(245, 244, 243);
 }
 #input-area {
-  width: 240px;
+  width: 248px;
   height: 66px;
   outline: none;
-  margin: 10px;
+  margin: 6px 6px 2px 6px;
   padding: 4px 6px;
   box-sizing: border-box;
   font-size: 14px;
@@ -52,8 +51,8 @@ html, body {
 }
 #clear-input-area {
   position: absolute;
-  right: 14px;
-  top: 14px;
+  right: 8px;
+  top: 8px;
   width: 24px;
   height: 24px;
   background-image: url(./imgs/close.png);
@@ -68,12 +67,25 @@ html, body {
   transition: all 0.2s;
   opacity: 1.0;
 }
+#cur-engine-name {
+  margin-left: 6px;
+  margin-bottom: 6px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: rgb(180, 169, 160);
+}
+#cur-engine-name span {
+  display: inline-block;
+  background: rgb(238, 233, 227);
+  padding: 1px 6px;
+  border-radius: 2px;
+}
 
 
 /* search engines */
 #engine-container {
-  margin-top: 86px;
-  padding: 0px 2px;
+  margin-top: 96px;
   border-radius: 4px;
   transition: all 0.2s;
 }
@@ -89,7 +101,7 @@ html, body {
   font-size: 14px;
 }
 .engine-group-name {
-  color:  rgb(180, 169, 160);
+  color: rgb(180, 169, 160);
   font-size: 12px;
 }
 .engine-group::after {

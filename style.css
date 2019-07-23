@@ -11,7 +11,7 @@ html, body {
   background: #ddd;
 }
 
-/* left: search tool */
+/* search tool */
 #search-tool {
   width: 100%;
   padding: 6px;
@@ -26,7 +26,7 @@ html, body {
 #search-bar {
   position: relative;
   width: 600px;
-  margin: 6px auto 20px auto;
+  margin: 6px auto 26px auto;
 }
 #input-area {
   width: 100%;
@@ -58,6 +58,11 @@ html, body {
 #clear-input-area:hover {
   transition: all 0.2s;
   opacity: 1.0;
+}
+#cur-engine-name {
+  text-align: center;
+  color: #666;
+  font-size: 12px;
 }
 
 /* search engines */
@@ -93,13 +98,13 @@ html, body {
   cursor: pointer;
 }
 .engine.selected {
-  background: rgb(239, 244, 245);
+  background: rgb(228, 240, 243);
 }
 .engine.is-frame {
   color: rgb(173, 135, 101);
 }
 .engine:hover {
-  background: rgb(239, 244, 245);
+  background: rgb(228, 240, 243);
 }
 .engine-name {
   vertical-align: middle;

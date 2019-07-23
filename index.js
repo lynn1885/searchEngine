@@ -1,19 +1,24 @@
 const engineList = {
   basic: [
     {
-      name: '百度',
-      href: 'http://www.baidu.com',
-      searchHref: 'https://www.baidu.com/s?wd=$search',
-      isIframe: true,
-    }, {
       name: 'Google',
       href: 'http://www.Google.com',
       searchHref: 'https://www.google.com/search?q=$search',
+    },{
+      name: '百度',
+      href: 'http://www.baidu.com',
+      searchHref: 'https://www.baidu.com/s?wd=$search',
+      // isIframe: true,
     }, {
       name: '知乎',
       href: 'https://www.zhihu.com',
       searchHref: 'https://www.zhihu.com/search?type=content&q=$search',
     }, {
+      name: '联合搜索',
+      href: 'https://www.gobaidugle.com/',
+      searchHref: 'https://www.gobaidugle.com/search3?keyword=$search&num=10&one=baidu&two=google&three=sogou&four=so',
+    }, 
+    {
       name: 'Google Translate',
       href: 'https://translate.google.com',
       searchHref: 'https://translate.google.com/#view=home&op=translate&sl=en&tl=zh-CN&text=$search',
@@ -21,12 +26,12 @@ const engineList = {
       name: '搜狗翻译',
       href: 'https://fanyi.sogou.com',
       searchHref: 'https://fanyi.sogou.com/#auto/zh-CHS/$search',
-      isIframe: true,
+      // isIframe: true,
     }, {
       name: '有道词典',
       href: 'http://dict.youdao.com/',
       searchHref: 'http://dict.youdao.com/w/eng/$search',
-      isIframe: true,
+      // isIframe: true,
     }
   ],
   academic: [
@@ -46,6 +51,21 @@ const engineList = {
       name: '百度学术',
       href: 'http://xueshu.baidu.com/',
       searchHref: 'http://xueshu.baidu.com/s?wd=$search',
+    },{
+      name: 'WIKI(EN)',
+      href: 'https://www.wikipedia.org',
+      searchHref: 'https://en.wikipedia.org/w/index.php?search=$search',
+      // isIframe: true,
+    },{
+      name: 'WIKI(中)',
+      href: 'https://www.wikipedia.org',
+      searchHref: 'https://zh.wikipedia.org/w/index.php?search=$search',
+      // isIframe: true,
+    }, {
+      name: '百度百科',
+      href: 'https://baike.baidu.com',
+      searchHref: 'https://baike.baidu.com/item/$search',
+      // isIframe: true,
     }
   ],
   images: [
@@ -53,7 +73,7 @@ const engineList = {
       name: '百度图片',
       href: 'https://image.baidu.com/',
       searchHref: 'https://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fm=index&fr=&hs=0&xthttps=111111&sf=1&fmq=&pv=&ic=0&nc=1&z=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=$search&rsp=-1',
-      isIframe: true,
+      // isIframe: true,
     }, {
       name: 'Google Image',
       href: 'https://www.google.com/search?q=art&newwindow=1&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjSj4qX35ThAhXhG6YKHbtwDAEQ_AUIDigB&biw=1536&bih=722',
@@ -62,25 +82,35 @@ const engineList = {
       name: 'IconFont',
       href: 'https://www.iconfont.cn',
       searchHref: 'https://www.iconfont.cn/search/index?q=$search',
+    }, {
+      name: '爱给网',
+      href: 'http://www.aigei.com',
+      searchHref: 'http://www.aigei.com/s?q=$search&type=2d',
     }
   ],
-  wikis: [
+  "passages, books": [
     {
-      name: 'WIKI(EN)',
-      href: 'https://www.wikipedia.org',
-      searchHref: 'https://en.wikipedia.org/w/index.php?search=$search',
-      isIframe: true,
+      name: '豆瓣读书',
+      href: 'https://book.douban.com/',
+      searchHref: 'https://book.douban.com/subject_search?search_text=$search',
+    },
+    {
+      name: 'goodreads',
+      href: 'https://www.goodreads.com/search',
+      searchHref: 'https://www.goodreads.com/search?utf8=%E2%9C%93&q=$search',
     },{
-      name: 'WIKI(中)',
-      href: 'https://www.wikipedia.org',
-      searchHref: 'https://zh.wikipedia.org/w/index.php?search=$search',
-      isIframe: true,
+      name: '公众号',
+      href: 'https://weixin.sogou.com/weixin',
+      searchHref: 'https://weixin.sogou.com/weixin?type=2&query=$search&ie=utf8&s_from=input',
     }, {
-      name: '百度百科',
-      href: 'https://baike.baidu.com',
-      searchHref: 'https://baike.baidu.com/item/$search',
-      isIframe: true,
-    }
+      name: '鸠摩搜书',
+      href: 'https://www.jiumodiary.com/',
+      searchHref: 'https://www.jiumodiary.com/',
+    }, {
+      name: 'epubee',
+      href: 'http://cn.epubee.com/books/',
+      searchHref: 'http://cn.epubee.com/books/?s=$search',
+    },
   ],
   program: [
     {
@@ -91,29 +121,37 @@ const engineList = {
       name: 'stackoverflow',
       href: 'https://stackoverflow.com',
       searchHref: 'https://stackoverflow.com/search?q=$search',
+    },{
+      name: '阮一峰的网络日志',
+      href: 'http://www.ruanyifeng.com/blog/',
+      searchHref: 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=$search%20site%3Awww.ruanyifeng.com',
+    },{
+      name: '码农翻身',
+      href: 'http://www.ruanyifeng.com/blog/',
+      searchHref: 'https://weixin.sogou.com/weixin?type=2&s_from=input&query=$search+%E7%A0%81%E5%86%9C%E7%BF%BB%E8%BA%AB',
     }
   ],
   others: [
     {
-      name: '公众号',
-      href: 'https://weixin.sogou.com/weixin',
-      searchHref: 'https://weixin.sogou.com/weixin?type=2&query=$search&ie=utf8&s_from=input',
-      isIframe: true,
-    }, {
-      name: '汉典',
-      href: 'http://www.zdic.net',
-      searchHref: 'http://www.zdic.net/sousuo/?q=$search',
-      isIframe: true,
-    }, {
       name: '淘宝',
       href: 'https://s.taobao.com',
       searchHref: 'https://s.taobao.com/search?q=$search',
-      isIframe: true,
-    }, {
+      // isIframe: true,
+    },{
+      name: '汉典',
+      href: 'http://www.zdic.net',
+      searchHref: 'http://www.zdic.net/sousuo/?q=$search',
+      // isIframe: true,
+    },{
       name: '豆瓣电影',
       href: 'https://movie.douban.com',
       searchHref: 'https://movie.douban.com/subject_search?search_text=$search',
+    },{
+      name: '网易云音乐',
+      href: 'https://music.163.com/#/search',
+      searchHref: 'https://music.163.com/#/search/m/?s=$search',
     }
+    
   ]
 };
 
@@ -123,7 +161,7 @@ let engineDom;
 const engineContainer = $('#engine-container');
 let i = 1;
 for (let groupName in engineList) {
-  engineDomStr += `<ul class="engine-group"> <span class="engine-group-name">${groupName}<span>`
+  engineDomStr += `<ul class="engine-group"> <div class="engine-group-name">${groupName}</div>`
   let j = 1;
   for (let engine of engineList[groupName]) {
     engineDomStr += `<li class="engine ${engine.isIframe ? 'is-frame' : ''}" data-href="${engine.href}" data-search-href="${engine.searchHref}" data-engine-id="${String(i) + j}" data-is-iframe="${engine.isIframe}">
@@ -143,7 +181,6 @@ engineContainer.append(engineDom);
 const title = $('title');
 const engines = $('.engine');
 const iframe = $('#search-content iframe');
-const curEngineName = $('#cur-engine-name span');
 const searchInput = $('#input-area');
 let selectedEngine = $(engines[0]);
 setSelectedEngine(engines, selectedEngine);
@@ -230,5 +267,4 @@ function setSelectedEngine (engines, selectedEngine) {
   }
   selectedEngine.addClass('selected');
   const selectedEngineName = selectedEngine.text();
-  curEngineName.text(selectedEngineName);
 }

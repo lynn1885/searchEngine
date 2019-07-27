@@ -133,7 +133,7 @@ const engineList = {
     },
     '汉典': {
       href: 'http://www.zdic.net',
-      searchHref: 'http://www.zdic.net/sousuo/?q=$search',
+      searchHref: 'https://www.zdic.net/hans/$search',
     },
     '豆瓣电影': {
       href: 'https://movie.douban.com',
@@ -142,6 +142,10 @@ const engineList = {
     '网易云音乐': {
       href: 'https://music.163.com/#/search',
       searchHref: 'https://music.163.com/#/search/m/?s=$search',
+    },
+    'youtube': {
+      href: 'https://www.youtube.com',
+      searchHref: 'https://www.youtube.com/results?search_query=$search',
     }
   }
 };

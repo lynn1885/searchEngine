@@ -43,7 +43,7 @@ for (let engineEl of engineEls) {
     let engine = engineList[path[0]][path[1]];
     setSelectedEngine(engineEls, $(e.currentTarget))
     const searchText = searchInputEl.val();
-    titleEl.text(`搜索: ${searchText}`);
+    titleEl.text(`搜索 ${searchText}`);
     if (!searchText) { // open website
       let href = engine.href;
       if (href) window.open(href, '_blank');

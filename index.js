@@ -7,10 +7,10 @@ let engineDomStr = '';
 let engineDom;
 const engineContainer = $('#engine-container');
 let i = 1;
-for (let groupName in engineList) {
-  engineDomStr += `<ul class="engine-group"> <div class="engine-group-name">${groupName}</div>`
+for (const groupName in engineList) {
+  engineDomStr += `<ul class="engine-group"> <div class="engine-group-name">${groupName}</div>`;
   let j = 1;
-  for (let engineName in engineList[groupName]) {
+  for (const engineName in engineList[groupName]) {
     engineList[groupName][engineName].id = String(i) + j;
     const engine = engineList[groupName][engineName];
     engineDomStr += `<li class="engine"
@@ -24,7 +24,7 @@ for (let groupName in engineList) {
     j++;
   }
   i++;
-  engineDomStr += '</ul>'
+  engineDomStr += '</ul>';
 }
 engineDom = $(engineDomStr);
 engineContainer.append(engineDom);
@@ -37,90 +37,126 @@ const curEngineName = $('#cur-engine-name');
 setSelectedEngine(engineEls, $(engineEls[0]));
 
 // bind click search event
-for (let engineEl of engineEls) {
-  engineEl.addEventListener('click', e => {
-    let path = e.currentTarget.getAttribute('data-path').split('---');
-    let engine = engineList[path[0]][path[1]];
-    setSelectedEngine(engineEls, $(e.currentTarget))
+for (const engineEl of engineEls) {
+  engineEl.addEventListener('click', (e) => {
+    const path = e.currentTarget.getAttribute('data-path').split('---');
+    const engine = engineList[path[0]][path[1]];
+    setSelectedEngine(engineEls, $(e.currentTarget));
     const searchText = searchInputEl.val();
     titleEl.text(`搜索 ${searchText}`);
     if (!searchText) { // open website
-      let href = engine.href;
+      const { href } = engine;
       if (href) window.open(href, '_blank');
-    } else {  // seach
+    } else { // seach
       if (!engine.isMulti) { // single search
-        let href = engine.searchHref.replace('$search', searchText);
+        const href = engine.searchHref.replace('$search', searchText);
         window.open(href, '_blank');
       } else { // multiple search
         const query = [path[1]];
-        for (let enPath of engine.engines) {
-          let en = engineList[enPath[0]][enPath[1]];
+        for (const enPath of engine.engines) {
+          const en = engineList[enPath[0]][enPath[1]];
           query.push(en.searchHref.replace('$search', searchText));
         }
-        query[0] += ': ' + searchText;
+        query[0] += `: ${searchText}`;
         window.open(`${multiUrl}?${encodeURIComponent(JSON.stringify(query))}`, '_blank');
       }
     }
-  })
+  });
 }
 
 // bind Enter search event
-searchInputEl.on('keydown', e => {
+searchInputEl.on('keydown', (e) => {
   // 阻止回车. 因为回车用于搜索功能了, 如果想要输入回车, 需要输入shift + 回车
   if (!e.shiftKey && e.keyCode === 13) {
     e.preventDefault();
   }
   setTimeout(() => {
-    // 在文本开始选择引擎
+    // // 在文本开始选择引擎
     const searchText = searchInputEl.val();
-    let matchRes1 = searchText.match(/^\s[0-9]{2}\s/);
-    if (matchRes1 && matchRes1.length > 0) {
-      let engineId = matchRes1[0].trim();
-      for (let groupName in engineList) {
-        for (let engineName in engineList[groupName]) {
-          if (engineList[groupName][engineName].id === engineId) {
-            setSelectedEngine(engineEls, $(`[data-engine-id="${engineId}"]`))
-            searchInputEl.val('');
-          }
-        }
-      }
-    }
-    // 在文本末尾选择引擎(并直接触发搜索)
-    let matchRes2 = searchText.match(/(.+)(\s[0-9]{2}\s)$/)
-    if (matchRes2 && matchRes2.length > 0) {
-      let engineId = matchRes2[2].trim();
-      for (let groupName in engineList) {
-        for (let engineName in engineList[groupName]) {
-          if (engineList[groupName][engineName].id === engineId) {
-            let oldInputVal = searchInputEl.val();
-            searchInputEl.val(oldInputVal.slice(0, oldInputVal.length - Number(matchRes2[2].length)));
-            setSelectedEngine(engineEls, $(`[data-engine-id="${engineId}"]`));
-            curSelectedEngineEl.trigger('click');
-          }
-        }
-      }
-    }
+    // const matchRes1 = searchText.match(/^\s[0-9]{2}\s/);
+    // if (matchRes1 && matchRes1.length > 0) {
+    //   const engineId = matchRes1[0].trim();
+    //   for (const groupName in engineList) {
+    //     for (const engineName in engineList[groupName]) {
+    //       if (engineList[groupName][engineName].id === engineId) {
+    //         setSelectedEngine(engineEls, $(`[data-engine-id="${engineId}"]`));
+    //         searchInputEl.val('');
+    //       }
+    //     }
+    //   }
+    // }
+    // // 在文本末尾选择引擎(并直接触发搜索)
+    // const matchRes2 = searchText.match(/(.+)(\s[0-9]{2}\s)$/);
+    // if (matchRes2 && matchRes2.length > 0) {
+    //   const engineId = matchRes2[2].trim();
+    //   for (const groupName in engineList) {
+    //     for (const engineName in engineList[groupName]) {
+    //       if (engineList[groupName][engineName].id === engineId) {
+    //         const oldInputVal = searchInputEl.val();
+    //         searchInputEl.val(oldInputVal.slice(0, oldInputVal.length - Number(matchRes2[2].length)));
+    //         setSelectedEngine(engineEls, $(`[data-engine-id="${engineId}"]`));
+    //         curSelectedEngineEl.trigger('click');
+    //       }
+    //     }
+    //   }
+    // }
     // 搜索
     if (!e.shiftKey && e.keyCode === 13 && searchText) {
-      curSelectedEngineEl.trigger('click');
+      // 搜索git
+      let realSearchText;
+      if (searchText.startsWith('git|')) {
+        // git atlassian
+        realSearchText = `${searchText.replace('git|', '')} site:https://www.atlassian.com/git/tutorials`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+
+        // stackoverflow
+        realSearchText = `${searchText.replace('git|', '')} site:https://stackoverflow.com/`;
+        realSearchText = `git ${realSearchText}`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+
+        // git官网
+        realSearchText = `${searchText.replace('git|', '')} site:https://git-scm.com/`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+      } else if (searchText.startsWith('vue|')) {
+        // 掘金
+        realSearchText = `${searchText.replace('vue|', '')} site:https://stackoverflow.com/`;
+        realSearchText = `vue ${realSearchText}`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+        // stackoverflow
+        realSearchText = `${searchText.replace('vue|', '')} site:https://stackoverflow.com/`;
+        realSearchText = `vue ${realSearchText}`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+        // vue-router
+        realSearchText = `${searchText.replace('vue|', '')} site:https://router.vuejs.org/zh/`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+        // vuex
+        realSearchText = `${searchText.replace('vue|', '')} site:https://vuex.vuejs.org/zh/`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+
+        // vue官网
+        realSearchText = `${searchText.replace('vue|', '')} site:https://cn.vuejs.org/`;
+        window.open(`https://www.google.com.hk/search?newwindow=1&c2coff=1&safe=strict&ei=zjrSXr-IILGCr7wP3sWGoAE&q=${encodeURIComponent(realSearchText)}&oq=${encodeURIComponent(realSearchText)}&gs_lcp=CgZwc3ktYWIQAzoECAAQQzoCCAA6BggAEAoQQzoFCCEQoAFQ1SJYhVJg1VVoBHAAeACAAdgBiAHQDpIBBjYuMTAuMZgBAKABAaABAqoBB2d3cy13aXo&sclient=psy-ab&ved=0ahUKEwi_p8fOtdvpAhUxwYsBHd6iARQQ4dUDCAw&uact=5`, '_blank');
+      } else {
+        curSelectedEngineEl.trigger('click');
+      }
     }
   }, 0);
 });
 
 // functoin: clear input area
-$('#clear-input-area').on('click', e => {
+$('#clear-input-area').on('click', (e) => {
   searchInputEl.val('');
   searchInputEl.focus();
 });
 
-// functoin: auto focus input 
+// functoin: auto focus input
 $(() => {
   $('#input-area').focus();
-})
+});
 
 // functoin: set selected engine
-function setSelectedEngine (engineEls, selectedEngineEl) {
-  for (let engine of engineEls) {
+function setSelectedEngine(engineEls, selectedEngineEl) {
+  for (const engine of engineEls) {
     engine.classList.remove('selected');
   }
   selectedEngineEl.addClass('selected');

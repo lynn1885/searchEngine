@@ -3,6 +3,7 @@ html, body {
   height: 100%;
   padding: 0;
   margin: 0;
+  background: #282c34;
 }
 ::-webkit-scrollbar {
   width: 0px;
@@ -18,7 +19,6 @@ html, body {
   margin: 0px;
   box-sizing: border-box;
   height: 100%;
-  background: rgb(250, 250, 250);
   overflow-y: auto;
 }
 
@@ -31,20 +31,22 @@ html, body {
 #input-area {
   width: 100%;
   height: 34px;
+  line-height: 32px;
   outline: none;
+  padding-left: 4px;
   box-sizing: border-box;
   font-size: 14px;
-  background: rgb(251, 251, 251);
+  background: #21252b;
   color: rgb(133, 133, 133);
   font-weight: bold;
   resize: none;
   border: none;
-  border-bottom: 1.2px solid rgb(238, 236, 235);
+  /* border-bottom: 1.2px solid rgb(238, 236, 235); */
 }
 #clear-input-area {
   position: absolute;
-  right: -20px;
-  top: 0px;
+  right: 4px;
+  top: 5px;
   width: 24px;
   height: 24px;
   background-image: url(./imgs/close.png);
@@ -94,17 +96,17 @@ html, body {
   line-height: 26px;
   padding: 4px 10px;
   border-radius: 2px;
-  color: #333;
+  color: #999;
   cursor: pointer;
 }
 .engine.selected {
-  background: rgb(228, 240, 243);
+  background:#21252b;
 }
 .engine.is-frame {
   color: rgb(173, 135, 101);
 }
 .engine:hover {
-  background: rgb(228, 240, 243);
+  background:#21252b;
 }
 .engine-name {
   vertical-align: middle;

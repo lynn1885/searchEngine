@@ -9,8 +9,12 @@ const engineList = {
       searchHref: 'https://www.baidu.com/s?wd=$search',
     },
     知乎: {
-      href: '',
+      href: 'https://www.zhihu.com',
       searchHref: 'https://www.zhihu.com/search?type=content&q=$search',
+    },
+    有道: {
+      href: 'http://www.youdao.com/w/',
+      searchHref: 'http://www.youdao.com/w/eng/$search',
     },
     'Google Translate': {
       href: 'https://translate.google.com',

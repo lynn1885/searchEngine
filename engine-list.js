@@ -12,7 +12,25 @@ const engineList = {
       href: 'https://www.zhihu.com',
       searchHref: 'https://www.zhihu.com/search?type=content&q=$search',
     },
-    有道: {
+    贴吧: {
+      href: 'https://tieba.baidu.com/index.html',
+      searchHref: 'https://tieba.baidu.com/f?ie=utf-8&kw=$search&fr=search',
+    },
+    搜狗公众号: {
+      href: 'https://weixin.sogou.com/weixin',
+      searchHref: 'https://weixin.sogou.com/weixin?type=2&query=$search&ie=utf8&s_from=input',
+    },
+    联合搜索: {
+      href: 'https://www.gobaidugle.com/',
+      searchHref: 'https://www.gobaidugle.com/search3?keyword=$search&num=20&one=baidu&two=google&three=sogou&four=so',
+    },
+    '聚合(搜狗,有道)': {
+      isMulti: true,
+      engines: [['basic', '搜狗翻译'], ['basic', '有道翻译'], ['basic', 'Google Translate']],
+    },
+  },
+  English: {
+    有道单词: {
       href: 'http://www.youdao.com/w/',
       searchHref: 'http://www.youdao.com/w/eng/$search',
     },
@@ -28,13 +46,9 @@ const engineList = {
       href: 'http://dict.youdao.com/',
       searchHref: 'http://dict.youdao.com/w/eng/$search',
     },
-    联合搜索: {
-      href: 'https://www.gobaidugle.com/',
-      searchHref: 'https://www.gobaidugle.com/search3?keyword=$search&num=20&one=baidu&two=google&three=sogou&four=so',
-    },
-    '聚合(搜狗,有道)': {
-      isMulti: true,
-      engines: [['basic', '搜狗翻译'], ['basic', '有道翻译'], ['basic', 'Google Translate']],
+    deepL: {
+      href: 'https://www.deepl.com/en/translator',
+      searchHref: 'https://www.deepl.com/en/translator#zh/en/$search',
     },
   },
   academic: {
@@ -72,7 +86,23 @@ const engineList = {
     },
   },
 
-  images: {
+  media: {
+    bilibili: {
+      href: 'https://www.bilibili.com/',
+      searchHref: 'https://search.bilibili.com/all?keyword=$search&from_source=nav_search_new',
+    },
+    百度视频: {
+      href: 'https://haokan.baidu.com/?sfrom=baidu-top',
+      searchHref: 'https://haokan.baidu.com/web/search/page?query=$search',
+    },
+    youtube: {
+      href: 'https://www.youtube.com',
+      searchHref: 'https://www.youtube.com/results?search_query=$search',
+    },
+    豆瓣电影: {
+      href: 'https://movie.douban.com',
+      searchHref: 'https://movie.douban.com/subject_search?search_text=$search',
+    },
     百度图片: {
       href: 'https://image.baidu.com/',
       searchHref: 'https://image.baidu.com/search/index?tn=baiduimage&ipn=r&ct=201326592&cl=2&lm=-1&st=-1&fm=index&fr=&hs=0&xthttps=111111&sf=1&fmq=&pv=&ic=0&nc=1&z=&se=1&showtab=0&fb=0&width=&height=&face=0&istype=2&ie=utf-8&word=$search&rsp=-1',
@@ -99,10 +129,7 @@ const engineList = {
       href: 'https://www.goodreads.com/search',
       searchHref: 'https://www.goodreads.com/search?utf8=%E2%9C%93&q=$search',
     },
-    公众号: {
-      href: 'https://weixin.sogou.com/weixin',
-      searchHref: 'https://weixin.sogou.com/weixin?type=2&query=$search&ie=utf8&s_from=input',
-    },
+
     鸠摩搜索: {
       href: 'https://www.jiumodiary.com/',
       searchHref: 'https://www.jiumodiary.com/',
@@ -139,17 +166,9 @@ const engineList = {
       href: 'http://www.zdic.net',
       searchHref: 'https://www.zdic.net/hans/$search',
     },
-    豆瓣电影: {
-      href: 'https://movie.douban.com',
-      searchHref: 'https://movie.douban.com/subject_search?search_text=$search',
-    },
     网易云音乐: {
       href: 'https://music.163.com/#/search',
       searchHref: 'https://music.163.com/#/search/m/?s=$search',
-    },
-    youtube: {
-      href: 'https://www.youtube.com',
-      searchHref: 'https://www.youtube.com/results?search_query=$search',
     },
   },
 };

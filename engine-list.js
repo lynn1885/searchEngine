@@ -20,6 +20,10 @@ const engineList = {
       href: 'https://weixin.sogou.com/weixin',
       searchHref: 'https://weixin.sogou.com/weixin?type=2&query=$search&ie=utf8&s_from=input',
     },
+    'duck duck go': {
+      href: 'https://duckduckgo.com/',
+      searchHref: 'https://duckduckgo.com/?q=$search&t=h_&ia=web',
+    },
     联合搜索: {
       href: 'https://www.gobaidugle.com/',
       searchHref: 'https://www.gobaidugle.com/search3?keyword=$search&num=20&one=baidu&two=google&three=sogou&four=so',
@@ -158,6 +162,14 @@ const engineList = {
     },
   },
   others: {
+    百度地图: {
+      href: 'https://map.baidu.com/',
+      searchHref: 'https://map.baidu.com/search/?querytype=s&wd=$search&c=268&pn=0&device_ratio=2&da_src=shareurl',
+    },
+    'Google earth': {
+      href: 'https://earth.google.com/',
+      searchHref: 'https://earth.google.com/web/search/$search/',
+    },
     淘宝: {
       href: 'https://taobao.com',
       searchHref: 'https://s.taobao.com/search?q=$search',
